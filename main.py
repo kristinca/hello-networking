@@ -50,6 +50,20 @@ My notes and work from the book 'Introduction to Networking' by Charles Severanc
 
 2. Network Architecture
     - The Four-Layer TCP/IP Model
+        _______________________
+        |                     |
+        |     Application     |
+        |_____________________|
+        |                     |
+        |      Transport      |
+        |_____________________|
+        |                     |
+        |    Internetwork     |
+        |_____________________|
+        |                     |
+        |        Link         |
+        |_____________________|
+
         * Link
             ** deals with the wired or wireless connection from your computer to the local area network
         * Internetwork
