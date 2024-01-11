@@ -155,5 +155,44 @@ My notes and work from the book 'Introduction to Networking' by Charles Severanc
             to requests for services or waits for incoming connections
   - window size: The amount of data that the sending computer is allowed to send before waiting for an acknowledgement
 
+  
+3. Link Layer
+  - Often the Link layer transmits data using a wire, a fiber optic cable, or a radio signal
+  - transmitting data:
+    * about 1 km: Wired Ethernet, WiFi, and the cellular phone network
+    * up to thousands of kilometers: fiber optics
+    * long distances: satelites
+  - Regardless of the distance we can send the data, it is still traveling over a single link
+
+3.1 Sharing the Air
+  - WiFi: laptop or phone is sending and receiving data with a small, low-powered radio
+  - PC sends packets to the router, which forwards the packets using a link to the rest of the net
+  - the first router that handles packets: base station or gateway
+  - all the computers within range can hear all packets
+  - WiFis have unique serial number at the time they are manufactured
+  - 48-bit serial number for WiFi radio (Media Access Control - MAC) example: 0f:2a:b3:1f:b3:1a
+  - when connecting to new WiFi, the computer needs to figure out
+    which of the MAC addresses on the WiFi can be used to send packets to the router
+      * sends a broadcast message with its own serial number as the “from” address
+        and the broadcast address as the “to” address to ask if there are any gateways present on the WiFi network
+
+          From: 0f:2a:b3:1f:b3:1a
+          To: ff:ff:ff:ff:ff:ff
+          Data: Who is the MAC-Gateway
+          for this network?
+
+      * If there is a gateway on the network, the gateway sends a message 
+        containing its serial number back to the computer
+
+          From: 98:2f:4e:78:c1:b4
+          To: 0f:2a:b3:1f:b3:1a
+          Data: I am the gateway
+          Welcome to my network
+
+      * no replies: the computer waits a few seconds and then assumes there is no gateway for this network
+      * no gateway: the computer might show a different WiFi icon or not show the WiFi icon at all
+  - use the broadcast address as little as possible because
+      !!! every computer connected to the WiFi receives and  !!! processes !!! any messages
+          sent to the broadcast address to make sure the messages were not intended for them
 
 """
