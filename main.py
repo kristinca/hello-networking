@@ -195,4 +195,35 @@ My notes and work from the book 'Introduction to Networking' by Charles Severanc
       !!! every computer connected to the WiFi receives and  !!! processes !!! any messages
           sent to the broadcast address to make sure the messages were not intended for them
 
+3.2 Courtesy and Coordination
+  - “token” : indicates when each station is given the opportunity to transmit data
+      * Stations cannot start a transmission unless they have token
+      * Instead of listening for “silence” and jumping in, they must wait for their turn to come around
+  - When a station receives the token and has a packet to send, it sends the packet
+  - Once the packet has been sent, the station gives up the token and waits until the token comes back to it
+  - If none of the stations have any data to send, 
+    the token is moved from one computer to the next computer as quickly as possible
+  - The “try then retry” CSMA/CD approach works very well when:
+      * there is NO DATA
+      * LOW or MODERATE LEVELS OF DATA levels of data are being sent
+  - on a token-style network
+    * no data being sent and you want to send a packet => wait for a while
+      before you receive the token and can start transmitting
+    * you finish your packet => wait until the token comes back before you can send the next packet
+  - token approach => when using a link medium such as as a satellite link or a undersea fiber optic link
+    where it might take too long or be too costly to detect a collision
+  - CSMA/CD (listen-try) => when the medium is inexpensive, shorter distance,
+    and there are a lot of stations sharing the medium that only send data in short bursts
+
+3.5 Glossary
+  - base station: Another word for the first router that handles your
+    packets as they are forwarded to the Internet
+  - broadcast: Sending a packet in a way that all the stations connected to a local area network will receive the packet
+  - gateway: A router that connects a local area network to a wider area network such as the Internet
+    Computers that want to send data outside the local network must send their packets to the gateway for forwarding
+  - MAC Address: An address that is assigned to a piece of network hardware when the device is manufactured
+  - token: A technique to allow many computers to share the same physical media without collisions.
+    Each computer must wait until it has received the token before it can send data
+  
+
 """
