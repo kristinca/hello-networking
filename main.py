@@ -224,6 +224,48 @@ My notes and work from the book 'Introduction to Networking' by Charles Severanc
   - MAC Address: An address that is assigned to a piece of network hardware when the device is manufactured
   - token: A technique to allow many computers to share the same physical media without collisions.
     Each computer must wait until it has received the token before it can send data
-  
+
+
+4. Internetworking Layer (IP)
+  - The job of the router is to make sure packets move through the router
+    and end up on the correct outbound link layer
+  - A typical packet passes through from five to 20 routers as it moves from its source to its destination
+  - Internet Protocol Address (IP Address): ultimate destination address of the packets
+
+4.1 Internet Protocol (IP) Addresses
+  - We cannot use link layer addresses to route packets across multiple networks
+      * There is !!! NO RELATIONSHIP !!! between a link layer address
+        and the location where that computer is connected to the network
+  - addresses assigned to every computer based on where the computer is connected to the network
+  - IPv4
+    * 4 numbers separated by dots
+    * example: 212.78.1.25
+    * each number => [0, 255]
+  - IPv6
+    * example: 2001:0db8:85a3:0042:1000:8a2e:0370:7334
+  - most important thing about IP addresses
+      !!! THEY CAN BE BROKEN INTO 2 PARTS !!!
+    * first part is called the Network Number
+      ** IPv4 example:
+          Network Number: 212.78
+          Host Identifier: 1.25
+      ** 65,536 computers could be connected to the network using the network number of "212.78"
+      ** all packets with an IP address of 212.78.*.* can be routed to the same location,
+         because all PCs appear to the net on a single connection
+      ** when a packet arrives in a router and the router needs to decide which outbound link to send the packet to,
+        the router only needs to look at the first part of the address to determine the best outbound link
+
+4.2 How Routers Determine the Routes
+  - When a new core router is connected to the Internet, it does not know all the routes
+  - It may know a few preconfigured routes, but to build a picture of how to route packets
+    it must discover routes as it encounters packets    
+  - When a router encounters a packet that it does not already know how to route,
+    it queries the routers that are its neighbors
+  - Sometimes the neighboring routers need to ask their neighbors and so on
+    until the route is actually found and sent back to the requesting router
+  - routing table for a particular router: mapping of network numbers to outbound links
+  - the router does a lookup on the first packet
+    * then it could route the next billion packets to that network number
+      just by using the information it already has in its routing tables
 
 """
