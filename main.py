@@ -268,4 +268,19 @@ My notes and work from the book 'Introduction to Networking' by Charles Severanc
     * then it could route the next billion packets to that network number
       just by using the information it already has in its routing tables
 
+4.3 When Things Get Worse and Better
+  - Sometimes the network has problems and a router must find a way to route data around the problems
+    * common problem: one of the outbound links fails
+      ** The router discards all of the entries in its routing table that were being routed on that link
+      ** Next, as more packets arrive for those network numbers, the router goes through the route discovery process again,
+       this time asking all the neighboring routers except the ones that can no longer be contacted due to the broken link
+      ** routing tables are rebuilt that reflect the new network configuration => packets are routed more slowly for a while
+
+      !!! THERE SHOULD BE AT LEAST 2 INDEPENDENT PATHS FROM A SOURCE NETWORK TO A DESTINATION NETWORK IN THE NETWORK CORE !!!
+    * Routers are also good at detecting and dynamically routing packets around links that are slow or temporarily overloaded
+    * side effects of the way routers discover the structure of the network
+      ** the route your packets take from the source to the destination can change over time
+      ** We don’t ask the IP layer to worry about the order of the packets, so second packet may arrive before the first
+
+
 """
