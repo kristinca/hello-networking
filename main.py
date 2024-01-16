@@ -280,7 +280,28 @@ My notes and work from the book 'Introduction to Networking' by Charles Severanc
     * Routers are also good at detecting and dynamically routing packets around links that are slow or temporarily overloaded
     * side effects of the way routers discover the structure of the network
       ** the route your packets take from the source to the destination can change over time
-      ** We don’t ask the IP layer to worry about the order of the packets, so second packet may arrive before the first
+      ** We don't ask the IP layer to worry about the order of the packets, so second packet may arrive before the first
 
+4.4 Determining Your Route
+  - the routers that participate in forwarding your packets across the Internet
+    do not know the entire route your packet will take
+    * They only know which link to send your packets to so they will get closer to their final destination
+  - most computers have a network diagnostic tool called “traceroute” (or “tracert”, depending on the OS)
+    that allows you to trace the route between your computer and a destination computer
+    * The traceroute command does not actually trace your packet at all
+    * It takes advantage of a feature in the IP network protocol that was designed
+      to avoid packets becoming “trapped” in the network and never reaching their destination
+  - how a packet might get trapped in the network forever and how the IP protocol solves that problem ???
+    * example: three routers with routing table entries that formed an endless loop
+    * Each of the routers thinks it knows the best outbound link for IP addresses that start with 212.78
+    * If a packet with a prefix of 212.78 found its way into one of these routers,
+      it would be routed around a circle of three links forever
+    * soon the links would be full of traffic going round and round, the routers would fill up with packets waiting to be sent
+      and all three routers would crash
+    * solution: each packet has a number called Time To Live (TTL)
+      ** Each time an IP packet is forwarded down a link, the router subtracts 1 from the TTL value
+      ** when the TTL reaches zero, the router assumes that something is wrong and throws the packet away
+      ** This approach ensures that routing loops do not bring whole areas of the network down
+      ** when the router throws a packet away, it usually sends back a courtesy notification + IP address of that router
 
 """
