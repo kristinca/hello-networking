@@ -304,4 +304,34 @@ My notes and work from the book 'Introduction to Networking' by Charles Severanc
       ** This approach ensures that routing loops do not bring whole areas of the network down
       ** when the router throws a packet away, it usually sends back a courtesy notification + IP address of that router
 
+4.5 Getting an IP Address
+
+  - Dynamic Host Configuration Protocol (DHCP)
+
+  ___________
+  |         |
+  |    PC   |    ======= IP? =======>     Server
+  |_________|
+
+  ___________
+  |         |
+  |    PC   |    <======= .42 =======     Server
+  |_________|
+
+  ___________
+  |         |
+  |    PC   |    <==================>     Server
+  |_________|
+
+
+    * first thing a computer does at the link level is sending a message to a special broadcast address, searches for a base station
+    * when the computer is successfully connected at the link layer through that base station,
+      it sends another broadcast message, searches for a gateway connected to the network 
+      ** if there is a gateway, it asks for its IP address and asks which IP should it use
+    * if the computer is not there for a while, that IP address is given to another one
+  - In some operating systems, when a computer connects to a network, issues a DHCP request, and receives no answer,
+    it decides to assign itself an IP address anyway. Often these self-assigned addresses start with "169. . . .".
+    * it's still without a gateway, it has no ossibility of getting packets routed across the local network and onto the Internet
+    * best that can be done is connect to a local network
+
 """
