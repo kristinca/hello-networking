@@ -331,7 +331,73 @@ My notes and work from the book 'Introduction to Networking' by Charles Severanc
     * if the computer is not there for a while, that IP address is given to another one
   - In some operating systems, when a computer connects to a network, issues a DHCP request, and receives no answer,
     it decides to assign itself an IP address anyway. Often these self-assigned addresses start with "169. . . .".
-    * it's still without a gateway, it has no ossibility of getting packets routed across the local network and onto the Internet
+    * it's still without a gateway, it has no possibility of getting packets routed across the local network and onto the Internet
     * best that can be done is connect to a local network
+
+4.6 A Different Kind of Address Reuse
+  - Addresses that start with “192.168.” are called non-routable addresses
+    * They can be used within a single local network, but not used on the global network
+  - Network Address Translation (NAT)
+
+    => conserve the real routable addresses and use the same non-routable addresses
+      over and over for workstations that move from one network to another
+
+    * The gateway has a single routable IP address that it is sharing
+      across multiple workstations that are connected to the gateway
+    * The computer uses its non-routable address like 192.168.0.5 to send its packets
+      but as the packets move across the gateway, the gateway replaces the address with its actual routable address
+    * When packets come back to your workstation, the router puts your workstation's non-routable
+      address back into the returning packets
+
+4.7 Global IP Address Allocation
+  - to connect the network for a new organization to the Internet:
+    * contact an Internet Service Provider and make a connection
+    * ISP would give you a range of IP addresses (i.e., one or more network numbers)
+      that you could allocate to the computers attached to your network
+    * they receive the network numbers from a higher-level Internet Service Provider
+    * At the top level of IP address allocations are five Regional Internet Registries (RIRs), for a major geographic area
+      ** North America (ARIN)
+      ** South and Central America (LACNIC)
+      ** Europe (RIPE NCC)
+      ** Asia-Pacific (APNIC)
+      ** Africa (AFRNIC)
+    
+      IPv4: 32-bit ==================>  IPv6: 128-bit
+
+  - The IP layer is not 100% reliable
+    * Packets can be lost due to momentary outages or because the network is momentarily confused
+      about the path that a packet needs to take across the network
+    * Packets that your system sends later can find a quicker route through the network
+      and arrive before packets that your system sent earlier
+    * instead of asking too much of the IP layer, we leave the problem of packet loss
+      and packets that arrive out of order to our next layer up, the Transport layer
+
+4.9 Glossary
+  - core router: A router that is forwarding traffic within the core of the Internet
+  - DHCP: Dynamic Host Configuration Protocol
+    * DHCP is how a portable computer gets an IP address when it is moved to a new location
+  - edge router: A router which provides a connection between a local network and the Internet. Equivalent to gateway
+  - Host Identifier: The portion of an IP address that is used to identify a computer within a local area network
+  - IP Address: A globally assigned address that is assigned to a computer
+    so that it can communicate with other computers that have IP addresses and are connected to the Internet
+    * To simplify routing in the core of the Internet IP addresses are broken into Network Numbers and Host Identifiers
+    * An example IP address 212.78.1.25 (IPv4)
+  - NAT: Network Address Translation. This technique allows a single global IP address
+    to be shared by many computers on a single local area network
+  - Network Number: The portion of an IP address that is used to dentify which local network the computer is connected to
+  - packet vortex: An error situation where a packet gets into an infinite loop because of errors in routing tables
+  - RIR: Regional Internet Registry
+    * The five RIRs roughly correspond to the continents of the world
+      and allocate IP address for the major geographical areas of the world
+  - routing tables: Information maintained by each router that keeps track
+    of which outbound link should be used for each network number
+  - Time To Live (TTL): A number that is stored in every packet that is reduced by one
+    as the packet passes through each router
+    * When the TTL reaches zero, the packet is discarded
+  - traceroute: A command that is available on many Linux/UNIX systems
+    that attempts to map the path taken by a packet as it moves from its source to its destination
+      * May be called tracert on Windows systems
+  - two-connected network: A situation where there is at least two possible paths between any pair of nodes in a network
+    * A two-connected network can lose any single link without losing overall connectivity
 
 """
