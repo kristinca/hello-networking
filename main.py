@@ -400,4 +400,59 @@ My notes and work from the book 'Introduction to Networking' by Charles Severanc
   - two-connected network: A situation where there is at least two possible paths between any pair of nodes in a network
     * A two-connected network can lose any single link without losing overall connectivity
 
+5. The Domain Name System
+  - The Domain Name System lets you access websites by their domain name, so 
+    you don't have to keep a list of numeric Internet Protocol (IP) addresses like 212.78.1.25
+    * IP address are determined by where your computer connects to the Internet
+  - When a computer makes a connection to a system using a domain name address
+    * the computer looks up the IP address that corresponds to the domain name
+      ** it's easier to move a server from one location to another
+      ** the server is given a new IP address and the entry for the domain address is updated
+    * then it makes the connection using the IP address
+
+5.1 Allocating Domain Names
+  - Domain names are allocated based on organizations that own the domain name
+  - International Corporation for Assigned Network Names and Numbers(ICANN)
+    * At the top of the domain name hierarchy
+    * Chooses the top-level domains (TLDs) like .com, .edu, and .org and assigns those to other organizations to manage
+    * Assigns two-letter country code top-level domain names like .us, .za, .nl, and .jp 
+      to countries (Country-Code Top-Level Domain Names (ccTLDs))
+      ** Countries often add second-level TLDs, like .co.uk
+    * Once a domain name is assigned to an organization,
+      the controlling organization is allowed to assign subdomains within the domain
+      ** The individual owners of those domains are allowed to manage their domain and
+        create subdomains under it for their own use or use by others
+
+5.2 Reading Domain Names
+  - example IP address: 212.78.1.25
+    * the left prefix is the Network Number
+    * right part of the address is most specific
+
+      212.78.1.25
+      Broad ----> Narrow
+
+    * For domain names, we read from right to left
+
+      drchuck.personal.si.umich.edu
+      Narrow         <---     Broad
+    
+      ** The most general part of this domain name is .edu -> higher education institutions
+      ** The subdomain umich.edu is a particular higher education institution
+
+5.4 Glossary
+  - DNS: Domain Name System
+         * A system of protocols and servers that allow networked applications to look up domain names
+         and retrieve the corresponding IP address for the domain name
+  - domain name: A name that is assigned within a top-level domain
+                 * example: khanacademy.org is a domain that is assigned within the .org top-level domain
+  - ICANN: International Corporation for Assigned Network Names and Numbers
+           * Assigns and manages the top-level domains for the Internet
+  - registrar: A company that can register, sell, and host domain names
+  - subdomain: A name that is created below a domain name
+               * example: umich.edu is a domain name and both 
+                 www.umich.edu and mail.umich.edu” are subdomains within umich.edu
+  - TLD: Top Level Domain
+         * The rightmost portion of the domain name
+         * example TLDs: .com, .org, .club, .help
+
 """
