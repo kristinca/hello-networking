@@ -454,5 +454,69 @@ My notes and work from the book 'Introduction to Networking' by Charles Severanc
   - TLD: Top Level Domain
          * The rightmost portion of the domain name
          * example TLDs: .com, .org, .club, .help
+  
+6. Transport Layer
+  
+        Link -----> Internetworking -----> Transport
+
+  - A key element of the Internetworking layer: it does not attempt to guarantee delivery of any particular packet,
+   * sometimes packets can be lost or misrouted
+  - The Transport layer is where we handle reliability and message reconstruction on the destination computer
+  - Just like the IP layer, the Transport layer adds a small amount of data to each packet
+    to help solve the problems of packet reassembly and retransmission
+
+6.1 Packet Headers
+  - packet going across one of many links between its source and destination computers has
+    * link header
+    * IP header
+    * Transport Control Protocol (TCP) header,
+    along with the actual data in the packet
+
+  
+     Link Header        IP Header         TCP Header       Data Packet
+    _______________________________________________________________________
+    |             |                   |                 |                 |
+    |  From | To  |  From | To | TTL  |  Port | Offset  |   ...           |
+    |_____________|___________________|_________________|_________________|
+
+
+    - Link Header
+      * removed when the packet is received on one link
+      * a new link header is added when the packet is sent out on the next link on its journey
+    - IP Headers
+      * holds the source and destination Internet Protocol (IP) addresses and the Time to Live (TTL) for the packet
+      * set on the source computer and is unchanged (other than the TTL)
+        as the packet moves through the various routers on its journey
+    - TCP Headers
+      * indicate where the data in each packet belongs
+      * it keeps track of the position of each packet relative to the beginning of the message or file
+        and places the offset in each packet that is created and sent
+    - IP and TCP headers
+      * stay with a packet as it is going across each link in its journey (may go across several link layers)
+
+6.2 Packet Reassembly and Retransmission
+  - As the destination computer receives the packets, it looks at the offset position from the beginning of the message
+    so it can put the packet into the proper place in the reassembled message
+  - the Transport layer handles packets that arrive out of order 
+    * it puts the packet data at the correct position relative to the beginning of the message
+  - Window size 
+    * amount of data that the sending computer will send before pausing to wait for an acknowledgment
+      from the Transport layer on the destination computer
+    * it is adjusted
+      ** ensures that data is sent rapidly when the connection between two computers is fast
+         and much more slowly when the connection has slow links or a heavy load
+  - If a packet is lost
+    * the destination computer will never send an acknowledgment for that data
+    * the sending computer quickly reaches the point where it has sent
+      enough unacknowledged data to fill up the window and stops sending new packets
+    * At this point, both computers are waiting 
+      ** the sending computer is waiting for an acknowledgement for a lost packet that will never come, 💔
+      ** the receiving computer is waiting for a lost packet that will never come, 💔
+    * At some point, the receiving computer sends a packet to the sending computer
+      indicating where in the stream the receiving computer has last received data
+      * When the sending computer receives this message, it resends data
+        from the last position that the receiving computer had successfully received ^^
+
+
 
 """
