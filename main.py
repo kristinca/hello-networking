@@ -516,7 +516,24 @@ My notes and work from the book 'Introduction to Networking' by Charles Severanc
       indicating where in the stream the receiving computer has last received data
       * When the sending computer receives this message, it resends data
         from the last position that the receiving computer had successfully received ^^
-
+ 
+6.3 The Transport Layer In Operation
+  - The sending computer must hold on to all of the data it is sending
+    until the data has been acknowledged
+  - Once the receiving computer acknowledges the data, the sending computer can discard the sent data
+  - example: a message is broken into many packets
+    * the first ten packets of the message have been sent and acknowledged by the destination computer ('a')
+    * the sending computer has sent six more packets ('S') and then stopped because it reached its window size
+    * => three packets that have been sent but not yet received (''S'')
+    * there are many hops in the network =>
+      it is very common for more than one packet to be enroute in the network at the same time
+    * The Transport layer on the receiving computer has received and acknowledged ten packets
+      + delivered them to the receiving application ('a')
+    * Receiving a packet out of order is not a cause for concern 
+      if the missing packet arrives in a reasonably short amount of time
+    * As long as all the packets are received, the receiving Transport layer will reconstruct the message,
+      fitting the packets together like puzzle pieces
+      + deliver them to the receiving application
 
 
 """
