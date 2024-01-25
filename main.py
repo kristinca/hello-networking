@@ -535,5 +535,47 @@ My notes and work from the book 'Introduction to Networking' by Charles Severanc
       fitting the packets together like puzzle pieces
       + deliver them to the receiving application
 
+6.4 Application Clients and Servers
+  
+  _____________
+  |           |                                             You provide reliable connections between
+  | Transport |    ======= What's my purpose ??? =======>   between networked applications 
+  |   layer   |                                             so those applications can send and receive streams of data
+  |___________|                                                             ||
+                                                                            ||
+                                                                            \/
+                                                            you compensate for the fact that
+                                                            the Link and Internetworking layers might lose data
+
+
+6.5 Server Applications and Ports
+  - Example server applications on a remote computer: web, video, mail
+  - Example: a web client (a browser) needs to connect to the web server running on the remote computer
+    * a client application needs to know which remote computer to connect to 
+      + needs to choose a particular application to interact with on that remote computer
+  - ports
+    * all have same IP Address
+    * each server application has a different port number
+    * well-known default ports for various server applications
+      ** Telnet (23) - Login
+      ** SSH (22) - Secure Login
+      ** HTTP (80) - World Wide Web
+      ** HTTPS (443) - Secure Web
+      ** SMTP (25) - Incoming Mail
+      ** IMAP (143/220/993) - Mail Retrieval
+      ** POP (109/110) - Mail Retrieval
+      ** DNS (53) - Domain Name Resolution
+      ** FTP (21) - File Transfer
+
+6.7 Glossary
+  - acknowledgement: When the receiving computer sends a notification back to the source computer
+                     indicating that data has been received
+  - buffering: Temporarily holding on to data that has been sent or received
+               until the computer is sure the data is no longer needed
+  - listen: When a server application is started and ready to accept incoming connections from client applications
+  - port: A way to allow many different server applications to be waiting for incoming connections on a single computer
+          * Each application listens on a different port
+          * Client applications make connections to well-known port numbers to make sure
+            they are talking to the correct server application
 
 """
