@@ -665,4 +665,92 @@ My notes and work from the book 'Introduction to Networking' by Charles Severanc
   - web browser: A client application that you run on your computer to retrieve and display web pages
   - web server: An application that deliver (serves up) Web pages
 
+8. Secure Transport Layer
+  - the Link, Internetwork, and Transport layers are focused on the efficient movement of data
+    and solving the problems of a large-scale shared distributed network
+    without worrying about the privacy of that data
+  - There are TWO general approaches to securing network activity
+    * The first makes sure that all of the network hardware (routers and links)
+      is in physically secure locations so it is not possible for someone to sneak in
+      and monitor traffic while it is crossing the Internet
+      ** not practical approach for hundreds of thousands of network routers owned and operated by many different organizations
+      ** once WiFi is added to the mix and your packets went over radio waves,
+         a network attacker could just sit in a coffee shop and intercept packets as they passed through the air
+    * Second approach is to encrypt data in your computer before it is sent across its first physical link,
+      and then decrypt the data in the destination computer after it arrives
+      ** The encryption also guarantees that there is no way to alter your data while it is crossing the Internet
+
+8.1 Encrypting and Decrypting Data
+  - ciphertext: scrambled message
+  - ALL encryption systems depend on some kind of a SECRET KEY
+    that BOTH parties are aware of so they can decrypt received data
+
+8.2 Two Kinds of Secrets
+- traditional way to encrypt transmissions is using a shared secret (a password, a sentence, a number)
+  that only the sending and receiving parties know
+- the attackers are monitoring and capturing all network traffic
+  ===> they could also capture the unencrypted message that contained the shared secret
+  ===> the attacker could intercept a message, delay it, then decrypt it, change and re-encrypt it,
+       and send the modified message back on its way
+- the concept of asymmetric key encryption (public/private keys) was developed in 1970
+  * The computer that will be receiving the encrypted data chooses both the encryption key and decryption key
+  * Then the encryption key is sent to the computer that will be sending the data
+  * The sending computer encrypts the data and sends it across the network
+  * The receiving computer uses the decryption key to decrypt the data
+  * We call the encryption key the public key because it can be widely shared
+  * We call the decryption key the private key because it never leaves the computer where it was created
+  * if an attacker has the public key (which was sent unencrypted) and the encrypted text,
+    it is quite difficult to decrypt the encrypted data
+
+8.3 Secure Sockets Layer (SSL)
+  - an optional partial layer between the Transport layer and the Application layer - to add security
+    ===> The Secure Sockets Layer (SSL) or Transport Layer Security (TLS)
+         * There are subtle differences between SSL and TLS but they both encrypt data at the Transport layer
+  - When an application requested that the Transport layer make a connection to a remote host,
+    it could request that the connection either be encrypted or unencrypted
+  - If an encrypted connection was requested, the Transport layer encrypted the data before breaking the stream into packets
+    * the Transport layer, Internetwork layer, and physical (link) layers could still
+      perform exactly the same way whether the packets were encrypted or not
+    * The applications making the connections were also spared the details of how encryption and decryption worked
+
+8.4 Encrypting Web Browser Traffic
+  - use https for all web traffic
+
+8.5 Certificates and Certificate Authorities
+  - is the public key that you have received when you connected to a server 
+    really from the organization it claims to be from ???
+  - example
+    * Perhaps you think you are connecting to www.amazon.com but a rogue computer intercepts your traffic,
+      claiming to be www.amazon.com and giving you a public key to use for encryption
+    * If your web browser trusts the key, it will use the rogue computer's public key to
+      encrypt your banking information and send it to the rogue computer
+    * The rogue computer gave you the public key, it also has the corresponding private key and
+      is able to decrypt and abscond with your banking information
+    * who the key is actually coming from is achieved by sending you a public key that is digitally
+      signed by a Certificate Authority (CA)
+      ** When your computer or browser is initially installed, it knows about a number of wellknown certificate authorities
+      ** If your browser is given a public key that is signed by one of the well-known certificate authorities,
+         it trusts the key and uses it to encrypt and send your data
+
+8.7 Glossary
+ - asymmetric key: An approach to encryption where one (public) key is used to encrypt data
+                   prior to transmission and a different (private) key is used to decrypt data once it is received
+ - certificate authority: An organization that digitally signs public keys after verifying
+                           that the name listed in the public key is actually the person
+                           or organization in possession of the public key
+ - ciphertext: A scrambled version of a message that cannot be read without knowing the decryption key and technique 
+ - decrypt: The act of transforming a ciphertext message to a plain text message using a secret or key
+ - encrypt: The act of transforming a plain text message to a ciphertext message using a secret or key
+ - plain text: A readable message that is about to be encrypted before being sent
+ - private key: The portion of a key pair that is used to decrypt transmissions
+ - public key: The portion of a key pair that is used to encrypt transmissions
+ - shared secret: An approach to encryption that uses the same key for encryption and decryption
+ - SSL: Secure Sockets Layer
+        * An approach that allows an application to request that a Transport layer connection
+          is to be encrypted as it crosses the network
+        * Similar to Transport Layer Security (TLS)
+  - TLS: Transport Layer Security
+         * An approach that allows an application to request that a Transport layer connection
+          is to be encrypted as it crosses the network. Similar to Secure Sockets Layer (SSL)
+
 """
