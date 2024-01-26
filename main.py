@@ -578,4 +578,91 @@ My notes and work from the book 'Introduction to Networking' by Charles Severanc
           * Client applications make connections to well-known port numbers to make sure
             they are talking to the correct server application
 
+7. Application Layer
+  - The architecture for a networked application is called client/server
+
+7.2 Application Layer Protocols
+  - Protocol: A set of rules that govern how we communicate
+  - HTTP (HyperText Transport Protocol) - web clients and web servers - https://tools.ietf.org/html/rfc7230
+
+7.3 Exploring the HTTP Protocol
+  - The telnet application was first developed in 1968
+      * was developed according to one of the earliest standards for the Internet https://tools.ietf.org/html/rfc15
+      * was designed and built even before the first TCP/IP network was in production
+
+      domain name (or IP address) + a port to connect to on that host
+
+      * example: telnet www.dr-chuck.com 80
+      * response: series of headers (metadata) describing the document ===> a blank line ===> the actual document
+
+7.4 The IMAP Protocol for Retrieving Mail
+  - used so that a mail application running on your computer can retrieve mail from a central server
+  - the Internet Message Access Protocol (IMAP) is described in a series of Request For Comment (RFC) documents
+    starting with this RFC https://tools.ietf.org/html/rfc3501
+  - example: client (C), server (S)
+          C: A142 SELECT INBOX
+          S: * 172 EXISTS
+          S: * 1 RECENT
+          S: * OK [UNSEEN 12] Message 12 is first unseen
+          S: * OK [UIDVALIDITY 3857529045] UIDs valid
+          S: * OK [UIDNEXT 4392] Predicted next UID
+          S: * FLAGS (\Answered \Flagged \Deleted \Seen \Draft)
+          S: * OK [PERMANENTFLAGS (\Deleted \Seen \*)] Limited
+          S: A142 OK [READ-WRITE] SELECT completed
+
+7.5 Flow Control
+  - example: the web browser has made a transport connection to the web server
+             and has started downloading an image file
+            * The web server has opened the image file and is sending the data
+              from the file to its Transport layer as quickly as possible
+            * !!! window size !!!
+            * When the window fills up, the web server is paused until the Transport layer
+             on the destination computer has started to receive and acknowledge packets
+            * As the Transport layer on the destination computer starts to receive packets,
+              reconstruct the stream of data, and acknowledge packets,
+              it delivers the reconstructed stream of packets to the web browser application display on the user's screen
+      
+    __________________________________________________________________________________
+    |                 |             | Internetwork    |            |                 |
+    |  Web Server App |  Transport  | And Link Layers | Transport  | Web Browser App |
+    |_________________|_____________|_________________|____________|_________________|      
+         /\       
+         ||       
+    _____||______                                                       ________
+    |           |       ...aSSSSSS ====== S S S =======> ..aRR R        | AAAA |
+    | ...FFFFF  |                  <======= ACK ========                | AA.. |
+    |___________|                                                       |______|
+
+      * The Transport layer has sent six packets (S) and has stopped sending
+        because it has reached its window size and paused the web server
+      * Three of those six packets have made it to the Transport layer on the destination computer (R)
+        and three of the packets are still making their way across the Internet (S)
+      * the destination Transport layer pieces the stream back together,
+        it both sends an acknowledgement (ACK) and delivers the data to the receiving application (the web browser)
+      * The web browser reconstructs the image (A) and displays it to the user as the data is received
+      * the transport layers !!! DO NOT KEEP THE PACKETS FOR THE ENTIRE FILE !!!
+        ** They only retain packets that are in transit and unacknowledged
+
+7.6 Writing Networked Applications
+
+7.8 Glossary
+  - HTML: HyperText Markup Language
+          * A textual format that marks up text using tags
+  - HTTP: HyperText Transport Protocol
+          * An Application layer protocol that allows web browsers to retrieve web documents from web servers
+  - IMAP: Internet Message Access Protocol.
+          * A protocol that allows mail clients to log into and retrieve mail from IMAP-enabled mail servers
+  - flow control: When a sending computer slows down to make sure that it does not overwhelm
+                  either the network or the destination computer.
+                  * Flow control also causes the sending computer o increase the speed at which data is sent
+                    when it is sure that the network and destination computer can handle the faster data rates
+  - socket: A software library available in many programming languages that makes creating a network connection
+            and exchanging data nearly as easy as opening and reading a file on your computer
+  - status code: One aspect of the HTTP protocol that indicates the overall success or failure of a request for a document
+  - telnet: A simple client application that makes TCP connections to various address/port combinations
+            and allows typed data to be sent across the connection
+            * In the early days of the Internet, telnet was used to remotely log in to a computer across the network
+  - web browser: A client application that you run on your computer to retrieve and display web pages
+  - web server: An application that deliver (serves up) Web pages
+
 """
