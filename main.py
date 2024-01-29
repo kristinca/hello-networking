@@ -753,4 +753,134 @@ My notes and work from the book 'Introduction to Networking' by Charles Severanc
          * An approach that allows an application to request that a Transport layer connection
           is to be encrypted as it crosses the network. Similar to Secure Sockets Layer (SSL)
 
+9. The OSI Model
+  - The TCP/IP model is an implementation model
+      * it provides the guidance for those who would build TCP/IP-compatible network hardware or software
+  - The Open System Interconnection (OSI) model is more of an abstract model
+      * it can be used to understand a wide range of network architectures
+      * it has seven layers
+        _______________________
+        |                     |
+        |     Application     |
+        |_____________________|
+        |                     |
+        |     Presentation    |
+        |_____________________|
+        |                     |
+        |       Session       |
+        |_____________________|
+        |                     |
+        |      Transport      |
+        |_____________________|
+        |                     |
+        |       Network       |
+        |_____________________|
+        |                     |
+        |      Data Link      |
+        |_____________________|
+        |                     |
+        |       Physical      |
+        |_____________________|
+
+9.1 Physical (Layer 1)
+  - deals with the physical attributes of the actual wired, wireless, fiber optic,
+    or other connection that is used to transport data across a single link
+  - defines the shapes of the connectors and type of media which can be used
+  - bit encoding (modulation)
+    * encodes the bits that make up the data being sent across the medium
+    * determines how fast data can be sent across the link
+
+9.2 Data Link (Layer 2)
+  - how the systems using a physical link cooperate with one another
+  - when data is broken into packets, the Data Link layer defines special sequences
+    to indicate the beginning and end of each packet
+  - The stations communicating using the physical connection are assigned addresses
+    to allow for effective use of the media
+  - on a wireless network multiple stations are sharing the same media
+    * the Data Link layer defines how those stations will share the connections
+      with the other systems connected to the network
+  - Most Data Link layers also have some form of checksum
+    to detect and/or correct for errors in the transmitted data
+  - design problems solved in the Physical and Data Link layers
+    of the OSI model are addressed by the Link layer of the TCP/IP model
+
+9.3 Network (Layer 3)
+  - Like the Internetwork Layer (IP) in the TCP/IP model, the OSI Network layer
+    deals with the global assignment of “routable” addresses to the various systems connected to the network
+  - governs how routers forward packets across multiple hops to get from their source to their destination
+  - Like the IP layer, The OSI Network layer does not attempt to be error free
+    * it assumes that lost data will be detected and retransmitted at the next layer up
+
+9.4 Transport (Layer 4)
+  - manages packet loss and retransmission as well as flow control and window size
+  - The rest of the functionality of the TCP/IP Transport layer
+    is handled in the Session layer in the OSI model
+
+9.5 Session (Layer 5)
+  - handles establishing connections between applications
+  - deals with ports so that a connecting client application
+    can find the correct server application on a particular system
+  - Some aspects of secure transmission are also handled in the OSI Session layer
+
+9.6 Presentation (Layer 6)
+  - focuses on how data is represented and encoded for transmission across the network
+  - handles data encryption and decryption
+  - example: the Presentation layer would describe how to encode the pixels of an image
+             so that the receiving application can properly decode the data
+
+9.7 Application (Layer 7)
+  - The OSI Application Layer is very similar to the Application layer
+    in the TCP/IP model, in that it contains the applications themselves
+  - some applications are client applications that initiate connections, 
+    other applications are the server applications that respond to those connection requests
+  - The various pairs of applications have protocol standards that define interoperability
+    between multiple clients and multiple servers from different vendors
+
+9.8 Comparing the OSI and TCP/IP Models
+
+9.9 Link Layer (TCP/IP)
+  - combines the Physical and Data Link layers from the OSI model
+  - The Physical and Data Link layers are usually implemented in hardware
+  - Products like Ethernet, WiFi, satellite or fiber optic often are implemented in a network driver card
+    that plugs into the back of a computer or router
+    * The network driver card generally implements both the physical and the data link
+      aspects of the connection in the hardware on the card
+    * data link layers are tuned to the limitations and requirements of their corresponding physical layers
+    * in real systems, it is somewhat rare for a particular data link layer to be
+      arbitrarily paired with any number of physical layers
+  - it can be hard to separate the physical and data link aspects for a particular link technology
+    * the TCP model combines them into a single layer for simplicity
+
+9.10 Internetwork Layer (TCP/IP)
+  - the OSI Network and TCP/IP Internetwork layers perform the same functions
+    of creating a globally routable address space and building routers
+    to insure that packets properly find their way from the source to the destination across multiple hops
+
+9.11 Transport Layer (TCP/IP)
+  - The features of the Transport layer in TCP/IP are spread across the Transport and Session layers of the OSI model
+  - The OSI Transport layer deals with flow control and packet retransmission
+  - The OSI Presentation layer deals with multiple applications running on multiple ports
+    as well as session establishment and teardown
+  - The Secure Sockets Layer (SSL) in the TCP/IP model corresponds to
+    parts of the Session and Presentation layers in the OSI model
+
+9.12 Application Layer (TCP/IP)
+  - The TCP/IP Application Layer combines the non-security aspects
+    of the OSI Presentation layer and the OSI Application layer
+  - many TCP/IP applications deal with issues like encoding and decoding various types of data
+  - the TCP/IP model does not see data formatting as a separate layer
+  - Various data encoding and decoding technologies are used in TCP/IP applications,
+    but TCP/IP tends to treat these capabilities as library code
+    that applications make use of as needed for the application
+
+9.14 Glossary
+  - abstract model: A model and set of terminology that is used to generally understand a problem area
+                    and guide the development of standards and implementations to solve problems
+  - implementation model: A model and set of terminology that is used to guide the development of standards
+                          and an implementation to solve a particular problem
+  - ISO: International Organization for Standardization
+        * A worldwide body that develops standards in computing, networking, and many other areas
+  - OSI: Open System Interconnection.
+         * A seven-layer model used to help organize the design of various approaches to network architecture.
+
 """
